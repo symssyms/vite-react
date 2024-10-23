@@ -1,10 +1,10 @@
-import {Box, SxProps}  from "@mui/material";
-import {ReactElement}  from "react";
-import {Route, Routes} from "react-router-dom";
-import Header          from "./header.tsx";
-import Movie           from './movie.tsx';
-import Movies          from './movies.tsx';
-import TVs             from './tvs.tsx';
+import {Box, SxProps}            from "@mui/material";
+import {ReactElement}            from "react";
+import {Navigate, Route, Routes} from "react-router-dom";
+import Header                    from "./header.tsx";
+import Movie                     from './movie.tsx';
+import Movies                    from './movies.tsx';
+import TVs                       from './tvs.tsx';
 
 
 function App(): ReactElement {
@@ -13,10 +13,10 @@ function App(): ReactElement {
             <Header/>
             <Box>
                 <Routes>
-                    {/*<Route path={'/'} element={<Movies/>}/>*/}
-                    <Route path={'/movies/:topic'} element={<Movies/>}/>
-                    <Route path={'/movie/:id'} element={<Movie/>}/>
-                    <Route path={'/tv/:topic'} element={<TVs/>}/>
+                    <Route path={'movies/:topic'} element={<Movies/>}/>
+                    <Route path={'movie/:id'} element={<Movie/>}/>
+                    <Route path={'tv/:topic'} element={<TVs/>}/>
+                    <Route path={'/'} element={<Navigate to={'/movies/popular'}/>}/>
                 </Routes>
             </Box>
         </Box>

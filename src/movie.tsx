@@ -1,12 +1,10 @@
+import {Box, SxProps}     from '@mui/material';
 import {FC, ReactElement} from 'react';
 import {useParams}        from 'react-router-dom';
-import {useMovie}         from './api/movies.ts';
+import {useMovie}         from './api/api-requests.ts';
+import MovieHeader        from './movie-header.tsx';
 
-interface Props {
-    className?: string
-}
-
-const Movie: FC<Props> = ({className}): ReactElement => {
+const Movie: FC = (): ReactElement => {
 
     const params = useParams();
     const {data, isLoading, error} = useMovie(Number(params.id), params.subject ?? 'movie');
@@ -14,10 +12,23 @@ const Movie: FC<Props> = ({className}): ReactElement => {
     console.log('movie', {data, isLoading, error});
 
     return (
-        <div className={className}>
-            <h1>Movie</h1>
-        </div>
+        <Box sx={styles}>
+            {
+                data !== undefined && !isLoading
+                    ? <Box>
+                        <MovieHeader item={data}/>
+
+                    </Box>
+                    : <Box>'Loading...'</Box>
+            }
+        </Box>
+
+
     );
 };
 
 export default Movie;
+
+const styles: SxProps = {
+    padding: '20px',
+}

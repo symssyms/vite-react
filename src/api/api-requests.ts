@@ -35,5 +35,5 @@ export const useMovies = (page: number = 1, subject: string = 'movie', topic: st
 
 export const useMovie = (id: number = 1, subject: string = 'movie', language: string = 'en-US') => {
     const queryParams = `?${qs.stringify({language})}`;
-    return useAuthQuery<IResponse<IMovieItem>>(`/${subject}/${id}` + queryParams);
+    return useAuthQuery<IMovieItem>(`/${subject}/${id}` + queryParams);
 }

@@ -1,7 +1,7 @@
 import {Box, Pagination, SxProps} from "@mui/material";
 import React, {FC, ReactElement}  from 'react';
 import {useParams}                from 'react-router-dom';
-import {useMovies}                from './api/movies.ts';
+import {useMovies}                from './api/api-requests.ts';
 import MovieItem                  from './movie-item';
 import {IMovie}                   from './shared/models/movie';
 
@@ -11,7 +11,6 @@ interface Props {
 
 const TVs: FC<Props> = ({className}): ReactElement => {
     const params = useParams();
-    console.log('params', params);
     const [currentPage, setCurrentPage] = React.useState(1);
 
     const {data, isLoading, error} = useMovies(currentPage, params.subject ?? 'tv', params.topic ?? 'popular');
@@ -25,7 +24,11 @@ const TVs: FC<Props> = ({className}): ReactElement => {
                     <MovieItem key={item.title} item={item}/>
                 ))}
             </Box>
-            <Pagination count={data?.total_pages} shape="rounded" onChange={(_, page: number) => setCurrentPage(page)}/>
+            <Pagination
+                count={data?.total_pages}
+                shape="rounded"
+                onChange={(_, page: number) => setCurrentPage(page)}
+            />
         </>
     );
 };
