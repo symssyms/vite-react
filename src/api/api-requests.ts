@@ -1,6 +1,7 @@
 import {useQuery}   from '@tanstack/react-query';
 import axios        from 'axios';
 import qs           from 'qs';
+import {ICredit}    from '../shared/models/credit.ts';
 import {IMovieItem} from '../shared/models/movie-item.ts';
 import {IMovie}     from '../shared/models/movie.ts';
 import {IResponse}  from '../shared/models/resporse.ts';
@@ -36,4 +37,9 @@ export const useMovies = (page: number = 1, subject: string = 'movie', topic: st
 export const useMovie = (id: number = 1, subject: string = 'movie', language: string = 'en-US') => {
     const queryParams = `?${qs.stringify({language})}`;
     return useAuthQuery<IMovieItem>(`/${subject}/${id}` + queryParams);
+}
+
+export const useCredits = (id: number = 1, subject: string = 'movie', language: string = 'en-US') => {
+    const queryParams = `?${qs.stringify({language})}`;
+    return useAuthQuery<ICredit>(`/${subject}/${id}/credits` + queryParams);
 }
