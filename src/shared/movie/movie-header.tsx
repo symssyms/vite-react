@@ -1,9 +1,19 @@
-import {Box, SxProps}                                   from '@mui/material';
-import {FC, ReactElement}                               from 'react';
-import {buildDictionary, formatMinutesToHours, IPerson} from './lib/utils.ts';
-import Poster                                           from './poster.tsx';
-import {ICrew}                                          from './shared/models/credit.ts';
-import {IMovieItem}                                     from './shared/models/movie-item.ts';
+import {Box, SxProps}               from '@mui/material';
+import {FC, ReactElement, useState} from 'react';
+import Poster                       from '../../components/ui/poster.tsx';
+import {
+    buildDictionary,
+    formatMinutesToHours,
+    getContrastColor,
+    getDominantColorFromUrl,
+    IPerson
+}                                   from '../../lib/utils.ts';
+import {
+    ICrew
+}                                   from '../models/credit.ts';
+import {
+    IMovieItem
+}                                   from '../models/movie-item.ts';
 
 interface Props {
     className?: string,
@@ -13,23 +23,26 @@ interface Props {
 
 const MovieHeader: FC<Props> = ({item, crews}): ReactElement => {
 
+    const [dominantColor, setDominantColor] = useState<string>('200,200,200');
+    const [contrastColor, setContrastColor] = useState<string>('200,200,200');
     const releaseYear: string = new Date(item.release_date).toLocaleDateString('en-US', {year: 'numeric'});
-    const releaseDate: string = new Date(item.release_date).toLocaleDateString('en-US', {
-        dateStyle: 'short'
-    });
+    const releaseDate: string = new Date(item.release_date).toLocaleDateString('en-US', {dateStyle: 'short'});
 
-    const bgImage = `url('https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces//${item.backdrop_path} norepeat')`;
+    const bgImage = `url('https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces/${item.backdrop_path} norepeat')`;
+    getDominantColorFromUrl(`https://image.tmdb.org/t/p/w154/${item.backdrop_path}`)
+        .then(color => {
+            setDominantColor(color);
+            setContrastColor(getContrastColor(color));
+
+        });
 
     const directing: Record<string, string[]> = buildDictionary(crews?.filter((e: ICrew) => e.known_for_department === 'Directing')
         .map((e: ICrew) => ({name: e.name, department: e.department} as IPerson)).slice(0, 3));
 
-    console.log(directing)
-
-    console.log('crew', directing)
     return (
         <Box
             sx={{backgroundImage: bgImage}}>
-            <Box sx={styles}>
+            <Box sx={styles(dominantColor, contrastColor)}>
                 <Poster size={'xl'} path={item.backdrop_path}/>
                 <Box sx={{
                     padding: '20px',
@@ -91,11 +104,13 @@ const MovieHeader: FC<Props> = ({item, crews}): ReactElement => {
 
 export default MovieHeader;
 
-const styles: SxProps = {
-    display: 'flex',
-    justifyContent: 'center',
-    width: '100%',
-    flexDirection: 'row',
-    color: 'white',
-    backgroundImage: `linear-gradient(to right, rgba(10.5, 31.5, 31.5, 1) calc((50vw - 170px) - 340px), rgba(10.5, 31.5, 31.5, 0.84) 50%, rgba(10.5, 31.5, 31.5, 0.84) 100%)`
-};
+const styles = (bgColor: string, color: string): SxProps => (
+    {
+        display: 'flex',
+        justifyContent: 'center',
+        width: '100%',
+        flexDirection: 'row',
+        color: `${color}`,
+        backgroundImage: `linear-gradient(to right, rgba(${bgColor}, 1) calc((50vw - 170px) - 340px), rgba(${bgColor}, 0.84) 50%, rgba(${bgColor}, 0.84) 100%)`
+    }
+);

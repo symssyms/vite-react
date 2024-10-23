@@ -15,5 +15,10 @@ export const navItems: INavItem[] = [
             {name: 'Popular', path: 'popular'},
             {name: 'Top Rated', path: 'top_rated'}
         ]
+    },
+    {
+        name: 'People', path: '/', children: [
+            {name: 'Popular People', path: 'person'}
+        ]
     }
 ];

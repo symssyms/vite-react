@@ -1,7 +1,7 @@
 import {Box}              from '@mui/material';
 import {FC, ReactElement} from 'react';
 import {Link}             from 'react-router-dom';
-import Poster             from './poster.tsx';
+import Poster             from './components/ui/poster.tsx';
 import {IMovie}           from './shared/models/movie.ts';
 
 interface Props {

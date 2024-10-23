@@ -1,7 +1,7 @@
 import {Box, SxProps}         from '@mui/material';
 import {FC, ReactElement}     from 'react';
 import {useParams}            from 'react-router-dom';
-import {useCredits, useMovie} from './api/api-requests.ts';
+import {useCredits, useMovie} from '../../api/api-requests.ts';
 import MovieActors            from './movie-actors.tsx';
 import MovieHeader            from './movie-header.tsx';
 

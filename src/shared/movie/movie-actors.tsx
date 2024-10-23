@@ -1,7 +1,7 @@
 import {Box, SxProps}     from '@mui/material';
 import {FC, ReactElement} from 'react';
-import ActorItem          from './actor-item.tsx';
-import {ICast}            from './shared/models/credit.ts';
+import ActorItem          from '../../actor-item.tsx';
+import {ICast}            from '../models/credit.ts';
 
 interface Props {
     className?: string,
@@ -33,7 +33,7 @@ const styles: SxProps = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'stretch',
     flexBasis: '20%',
     gap: '10px',
     overflow: 'hidden'
