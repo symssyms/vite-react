@@ -8,6 +8,7 @@ import TVs                       from './tvs.tsx';
 
 
 function App(): ReactElement {
+
     return (
         <Box sx={styles} className={'app'}>
             <Header/>
@@ -16,7 +17,7 @@ function App(): ReactElement {
                     <Route path={'movies/:topic'} element={<Movies/>}/>
                     <Route path={'movie/:id'} element={<Movie/>}/>
                     <Route path={'tv/:topic'} element={<TVs/>}/>
-                    <Route path={'/'} element={<Navigate to={'/movies/popular'}/>}/>
+                    <Route path={'/'} element={<Navigate to={'movies/popular'}/>}/>
                 </Routes>
             </Box>
         </Box>

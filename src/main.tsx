@@ -8,7 +8,7 @@ import './index.css'
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')!).render(
-    <BrowserRouter>
+    <BrowserRouter basename="/vite-react">
         <QueryClientProvider client={queryClient}>
             <App />
         </QueryClientProvider>
