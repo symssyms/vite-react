@@ -17,14 +17,16 @@ const TVs: FC<Props> = ({className}): ReactElement => {
     const {data, isLoading, error} = useMovies(currentPage, params.subject ?? 'tv', params.topic ?? 'popular');
 
     return (
-        <Box className={className} sx={styles}>
-            {isLoading && 'Loading...'}
-            {error && 'Error'}
-            {data?.results && data?.results.map((item: IMovie): ReactElement => (
-                <MovieItem key={item.title} item={item}/>
-            ))}
+        <>
+            <Box className={className} sx={styles}>
+                {isLoading && 'Loading...'}
+                {error && 'Error'}
+                {data?.results && data?.results.map((item: IMovie): ReactElement => (
+                    <MovieItem key={item.title} item={item}/>
+                ))}
+            </Box>
             <Pagination count={data?.total_pages} shape="rounded" onChange={(_, page: number) => setCurrentPage(page)}/>
-        </Box>
+        </>
     );
 };
 
