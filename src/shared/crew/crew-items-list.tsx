@@ -2,13 +2,13 @@ import {Box}                        from '@mui/material';
 import {FC, ReactElement}           from 'react';
 import {createDepartmentDictionary} from '../../lib/utils.ts';
 import {ICrew}                      from '../models/credit.ts';
-import MovieCrewItem                from './movie-crew-item.tsx';
+import CrewItem                     from './crew-item.tsx';
 
 interface Props {
     crews: ICrew[]
 }
 
-const MovieCrewItemsList: FC<Props> = ({crews}): ReactElement => {
+const CrewItemsList: FC<Props> = ({crews}): ReactElement => {
     console.log(crews);
     const crewsDic = createDepartmentDictionary(crews);
     return (
@@ -21,7 +21,7 @@ const MovieCrewItemsList: FC<Props> = ({crews}): ReactElement => {
                     <Box key={key}>
                         <Box component={'h4'} sx={{marginY: '10'}}>{key}</Box>
                         <Box sx={styles}>
-                            {crewsDic[key].map((crew: ICrew): ReactElement => <MovieCrewItem
+                            {crewsDic[key].map((crew: ICrew): ReactElement => <CrewItem
                                 key={crew.name + crew.id + crew.job}
                                 crew={crew}/>)}
                         </Box>
@@ -32,7 +32,7 @@ const MovieCrewItemsList: FC<Props> = ({crews}): ReactElement => {
     );
 };
 
-export default MovieCrewItemsList;
+export default CrewItemsList;
 
 const styles = {
     display: 'flex',

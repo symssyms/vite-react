@@ -2,10 +2,12 @@ import {Box, SxProps}            from "@mui/material";
 import {ReactElement}            from "react";
 import {Navigate, Route, Routes} from "react-router-dom";
 import Header                    from "./header.tsx";
-import Movies                    from './movies.tsx';
 import MovieCast                 from './shared/movie/movie-cast.tsx';
 import Movie                     from './shared/movie/movie.tsx';
-import TVs                       from './tvs.tsx';
+import Movies                    from './shared/movies/movies.tsx';
+import TVShowCast                from './shared/tv-show/tv-show-cast.tsx';
+import TVShow                    from './shared/tv-show/tv-show.tsx';
+import TVShows                   from './shared/tv-shows/tv-shows.tsx';
 
 
 function App(): ReactElement {
@@ -17,8 +19,10 @@ function App(): ReactElement {
                 <Routes>
                     <Route path={'movies/:topic'} element={<Movies/>}/>
                     <Route path={'movie/:id/cast'} element={<MovieCast/>}/>
+                    <Route path={'tv/:id/cast'} element={<TVShowCast/>}/>
                     <Route path={'movie/:id'} element={<Movie/>}/>
-                    <Route path={'tv/:topic'} element={<TVs/>}/>
+                    <Route path={'tv-shows/:topic'} element={<TVShows/>}/>
+                    <Route path={'tv/:id'} element={<TVShow/>}/>
                     <Route path={'/'} element={<Navigate to={'movies/popular'}/>}/>
                 </Routes>
             </Box>

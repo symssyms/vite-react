@@ -1,16 +1,24 @@
+import noUserFemale                                             from '/public/no-user-female.svg';
+import noUserMale                                               from '/public/no-user-male.svg';
 import {Box, Card, CardContent, CardMedia, SxProps, Typography} from '@mui/material';
 import {FC, ReactElement}                                       from 'react';
 import {Link}                                                   from 'react-router-dom';
 import {AVATAR_BASE_URL_MD}                                     from '../../lib/constants.ts';
 import {ICast}                                                  from '../models/credit.ts';
+import {ItemTypeEnum}                                           from '../models/item-type.ts';
 
 interface Props {
     cast?: ICast,
-    movieId: number
+    movieId: number,
+    subject: ItemTypeEnum
 }
 
-const ActorItem: FC<Props> = ({cast, movieId}): ReactElement => {
-    const profile_path = AVATAR_BASE_URL_MD + cast?.profile_path;
+const ActorItem: FC<Props> = ({cast, movieId, subject}): ReactElement => {
+
+    const profile_path = cast?.profile_path !== null
+        ? AVATAR_BASE_URL_MD + cast?.profile_path
+        : cast?.gender === 1 ? noUserMale : noUserFemale;
+
     return (
         <>
             {cast &&
@@ -32,7 +40,7 @@ const ActorItem: FC<Props> = ({cast, movieId}): ReactElement => {
                     </Card>
                 </Link>}
             {!cast &&
-                <Link to={`/movie/${movieId}/cast`} style={stylesCard}>
+                <Link to={`/${subject}/${movieId}/cast`} style={stylesCard}>
                     <Box sx={{margin: 'auto'}}>
                         <Box component={'h3'} sx={{padding: '0', width: '10%', color: 'black', textWrap: 'nowrap'}}>View
                             all</Box>

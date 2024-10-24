@@ -1,18 +1,21 @@
+import noUserFemale                                        from '/public/no-user-female.svg';
+import noUserMale                                          from '/public/no-user-male.svg';
 import {Card, CardContent, CardMedia, SxProps, Typography} from '@mui/material';
 import {FC, ReactElement}                                  from 'react';
 import {Link}                                              from 'react-router-dom';
 import {AVATAR_BASE_URL_XS}                                from '../../lib/constants.ts';
 import {ICast}                                             from '../models/credit.ts';
 
+
 interface Props {
     cast: ICast
 }
 
-const MovieCastItem: FC<Props> = ({cast}): ReactElement => {
+const CastItem: FC<Props> = ({cast}): ReactElement => {
 
     const castUrl = cast.profile_path !== null
         ? AVATAR_BASE_URL_XS + cast.profile_path
-        : cast.gender === 1 ? '/no-user-male.svg' : '/no-user-female.svg';
+        : cast.gender === 1 ? noUserMale : noUserFemale;
 
     return (
         <Link to={'/person/' + cast.id} style={{textDecoration: 'none'}}>
@@ -40,7 +43,7 @@ const MovieCastItem: FC<Props> = ({cast}): ReactElement => {
     );
 };
 
-export default MovieCastItem;
+export default CastItem;
 
 const stylesTitle: SxProps = {
     flex: '1 0 auto',

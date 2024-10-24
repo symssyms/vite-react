@@ -1,8 +1,8 @@
 import {Card, CardContent, CardMedia, Typography} from '@mui/material';
 import {FC, ReactElement}                         from 'react';
 import {Link}                                     from 'react-router-dom';
-import {POSTER_BASE_URL_MD}                       from './lib/constants.ts';
-import {IMovie}                                   from './shared/models/movie.ts';
+import {POSTER_BASE_URL_MD}                       from '../../lib/constants.ts';
+import {IMovie}                                   from '../models/movie.ts';
 
 interface Props {
     item: IMovie
