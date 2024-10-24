@@ -2,8 +2,8 @@ import {Box, SxProps}            from "@mui/material";
 import {ReactElement}            from "react";
 import {Navigate, Route, Routes} from "react-router-dom";
 import Header                    from "./header.tsx";
-import Movie                     from './movie.tsx';
 import Movies                    from './movies.tsx';
+import Movie                     from './shared/movie/movie.tsx';
 import TVs                       from './tvs.tsx';
 
 
@@ -27,7 +27,7 @@ function App(): ReactElement {
 export default App
 
 const styles: SxProps = {
-    width: '100vw',
+    width: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

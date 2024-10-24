@@ -1,14 +1,18 @@
 import {Box, SxProps} from "@mui/material";
 import {ReactElement} from 'react';
+import {Link}         from 'react-router-dom';
 import {navItems}     from './lib/constants.ts';
 import Navigation     from './navigation.tsx';
 
 const Header = (): ReactElement =>
     (
         <Box sx={styles} className={'header'}>
-            <img
+            <Link to={'/'}>
+                <img
                 src={'https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg'}
                 width={154} height={20}/>
+            </Link>
+
             <Navigation items={navItems}/>
         </Box>
     );
@@ -16,6 +20,7 @@ const Header = (): ReactElement =>
 export default Header;
 
 const styles: SxProps = {
+    position: 'relative',
     minHeight: '64px',
     height: '64px',
     width: '100%',

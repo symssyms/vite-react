@@ -43,7 +43,7 @@ const styles: SxProps = {
     flexWrap: 'wrap',
     width: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'stretch',
     flexBasis: '30%',
     gap: '15px'
 };
