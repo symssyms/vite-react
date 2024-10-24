@@ -8,19 +8,20 @@ import MovieHeader            from './movie-header.tsx';
 const Movie: FC = (): ReactElement => {
 
     const params = useParams();
+    const movieId = Number(params.id);
     const {
         data: movieData,
         isLoading: isLoadingMovie,
         error: errorMovie
-    } = useMovie(Number(params.id), params.subject ?? 'movie');
-    const {data: castData, isLoading: isLoadingCast, error: errorCast} = useCredits(Number(params.id));
+    } = useMovie(movieId, params.subject ?? 'movie');
+    const {data: castData, isLoading: isLoadingCast, error: errorCast} = useCredits(movieId);
     return (
         <Box sx={styles}>
             {
                 movieData !== undefined && castData !== undefined && !isLoadingMovie && !errorMovie &&
                 <Box>
                     <MovieHeader item={movieData} crews={castData.crew}/>
-                    <MovieActors casts={castData.cast} error={errorCast} isLoading={isLoadingCast}/>
+                    <MovieActors casts={castData.cast} error={errorCast} isLoading={isLoadingCast} movieId={movieId}/>
                 </Box>
             }
             {isLoadingMovie && <Box component={'h1'}>Loading...</Box>}

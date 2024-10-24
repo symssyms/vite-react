@@ -6,18 +6,21 @@ import ActorItem          from './actor-item.tsx';
 interface Props {
     className?: string,
     casts: ICast[],
+    movieId: number,
     error: Error | null,
     isLoading: boolean
 }
 
-const MovieActors: FC<Props> = ({casts, error, isLoading = true}): ReactElement => {
+const MovieActors: FC<Props> = ({casts, movieId, error, isLoading = true}): ReactElement => {
     return (
         <Box sx={{position: 'relative', margin: '0 auto'}}>
             {
                 casts !== undefined && casts &&
                 <Box sx={styles}>
-                    {casts.slice(0, 7).map((cast: ICast): ReactElement => <ActorItem key={cast.id} cast={cast}/>)}
-                    <ActorItem/>
+                    {casts.slice(0, 7)
+                        .map((cast: ICast): ReactElement => <ActorItem key={cast.id} cast={cast} movieId={movieId}/>)}
+
+                    {casts.length > 7 && <ActorItem movieId={movieId}/>}
                 </Box>
             }
             {isLoading && <Box component={'h1'}>Loading...</Box>}
@@ -29,12 +32,11 @@ const MovieActors: FC<Props> = ({casts, error, isLoading = true}): ReactElement 
 export default MovieActors;
 
 const styles: SxProps = {
-    padding: '20px',
+    paddingY: '20px',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'stretch',
-    flexBasis: '20%',
-    gap: '10px',
+    gap: '20px',
     overflow: 'hidden'
 }

@@ -1,5 +1,12 @@
 import {INavItem} from '../shared/models/nav-item.ts';
 
+export const AVATAR_BASE_URL_XS: string = 'https://media.themoviedb.org/t/p/w66_and_h66_face/';
+export const AVATAR_BASE_URL_MD: string = 'https://media.themoviedb.org/t/p/w138_and_h175_face/';
+export const AVATAR_BASE_URL_XL: string = 'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/';
+export const POSTER_BASE_URL_SM: string = 'https://media.themoviedb.org/t/p/w58_and_h87_face/';
+export const POSTER_BASE_URL_MD: string = 'https://image.tmdb.org/t/p/w154/';
+export const POSTER_BASE_URL_XXL: string = 'https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces';
+
 export const navItems: INavItem[] = [
     {
         name: 'Movies', path: '/movies', children: [

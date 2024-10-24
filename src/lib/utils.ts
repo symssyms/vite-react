@@ -1,3 +1,5 @@
+import {ICrew} from '../shared/models/credit.ts';
+
 export const formatMinutesToHours = (minutes: number) => {
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
@@ -70,4 +72,23 @@ export const getContrastColor = (bgColor: string): string => {
     const brightness = 0.299 * red + 0.587 * green + 0.114 * blue;
 
     return brightness > 128 ? 'rgb(0, 0, 0)' : 'rgb(255, 255, 255)';
+};
+
+export const createDepartmentDictionary = (persons: ICrew[]): Record<string, ICrew[]> => {
+    const departmentDict = persons.reduce((acc: Record<string, ICrew[]>, person: ICrew) => {
+        if (!acc[person.department]) {
+            acc[person.department] = [];
+        }
+        acc[person.department].push(person);
+        return acc;
+    }, {});
+
+    const sortedKeys = Object.keys(departmentDict).sort();
+
+    const sortedDict: Record<string, ICrew[]> = {};
+    sortedKeys.forEach((key) => {
+        sortedDict[key] = departmentDict[key];
+    });
+
+    return sortedDict;
 };
