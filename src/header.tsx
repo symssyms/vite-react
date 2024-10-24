@@ -20,6 +20,7 @@ const Header = (): ReactElement =>
 export default Header;
 
 const styles: SxProps = {
+    position: 'relative',
     minHeight: '64px',
     height: '64px',
     width: '100%',

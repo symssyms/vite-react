@@ -1,20 +1,50 @@
-import {Box}              from '@mui/material';
-import {FC, ReactElement} from 'react';
-import {Link}             from 'react-router-dom';
-import Poster             from './components/ui/poster.tsx';
-import {IMovie}           from './shared/models/movie.ts';
+import {Card, CardContent, CardMedia, Typography} from '@mui/material';
+import {FC, ReactElement}                         from 'react';
+import {Link}                                     from 'react-router-dom';
+import {IMovie}                                   from './shared/models/movie.ts';
 
 interface Props {
-    className?: string,
     item: IMovie
 }
 
-const MovieItem: FC<Props> = ({className, item}): ReactElement =>
-    <Link to={`/movie/${item.id}`}>
-        <Box className={className} sx={{width: '22%', flex: '1 1 auto'}}>
-            <Poster path={item.poster_path} size={'lg'}/>
-            <p style={{textWrap: 'wrap'}}>{item.title}</p>
-        </Box>
+const MovieItem: FC<Props> = ({item}): ReactElement => {
+    const posterUrl = 'https://image.tmdb.org/t/p/w154/' + item.poster_path;
+
+
+    return <Link to={`/movie/${item.id}`} style={styles}>
+        <Card>
+            <CardMedia
+                sx={{height: 263, width: 176}}
+                image={posterUrl}
+                title={item.title}
+            />
+            <CardContent>
+                <Typography gutterBottom variant="h6" component="div"
+                            sx={{
+                                marginY: '0',
+                                lineHeight: 1.2,
+                                fontSize: '1rem',
+                                fontWeight: 'bold',
+                                fontFamily: '"Source Sans Pro", Arial, sans-serif'
+                            }}>
+                    {item.title}
+                </Typography>
+                <Typography variant="body2" sx={{color: 'text.secondary'}}>
+                    {item.release_date}
+                </Typography>
+            </CardContent>
+        </Card>
     </Link>;
+};
 
 export default MovieItem;
+
+const styles = {
+    flexGrow: 1,
+    flexShrink: 0,
+    maxWidth: 176,
+    minWidth: 176,
+    flexBasis: '20%',
+    textDecoration: 'none',
+    display: 'flex',
+}

@@ -1,6 +1,6 @@
 import {Box, Card, CardContent, CardMedia, Typography} from '@mui/material';
 import {FC, ReactElement}                              from 'react';
-import {ICast}                                         from './shared/models/credit.ts';
+import {ICast}                                         from '../models/credit.ts';
 
 interface Props {
     className?: string,

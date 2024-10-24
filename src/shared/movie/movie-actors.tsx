@@ -1,7 +1,7 @@
 import {Box, SxProps}     from '@mui/material';
 import {FC, ReactElement} from 'react';
-import ActorItem          from '../../actor-item.tsx';
 import {ICast}            from '../models/credit.ts';
+import ActorItem          from './actor-item.tsx';
 
 interface Props {
     className?: string,

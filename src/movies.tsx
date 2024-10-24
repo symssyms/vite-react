@@ -15,13 +15,20 @@ const Movies: FC<Props> = ({className}): ReactElement => {
     const {data, isLoading, error} = useMovies(currentPage, params.subject ?? 'movie', params.topic ?? 'popular');
 
     return (
-        <>
+        <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '20px',
+        }}>
             <Box className={className} sx={styles}>
-                {isLoading && 'Loading...'}
-                {error && 'Error'}
                 {data?.results && data?.results.map((item: IMovie): ReactElement => (
                     <MovieItem key={item.title} item={item}/>
                 ))}
+                {isLoading && 'Loading...'}
+                {error && 'Error'}
             </Box>
 
             <Pagination
@@ -29,7 +36,7 @@ const Movies: FC<Props> = ({className}): ReactElement => {
                 shape="rounded"
                 onChange={(_, page: number) => setCurrentPage(page)}
             />
-        </>
+        </Box>
     );
 };
 
@@ -37,13 +44,10 @@ export default Movies;
 
 const styles: SxProps = {
     padding: '20px',
-    flexGrow: 1,
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    width: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
-    flexBasis: '30%',
+    alignItems: 'stretch',
     gap: '15px'
 };
