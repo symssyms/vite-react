@@ -1,18 +1,21 @@
-import {Box, Pagination, SxProps}   from "@mui/material";
-import {FC, ReactElement, useState} from 'react';
-import {useParams}                  from 'react-router-dom';
-import {useMovies}                  from './api/api-requests.ts';
-import MovieItem                    from './movie-item';
-import {IMovie}                     from './shared/models/movie';
+import {Box, Pagination, SxProps} from "@mui/material";
+import React, {FC, ReactElement}  from 'react';
+import {useParams}                from 'react-router-dom';
+import {useMovies}                from '../../api/api-requests.ts';
+import {ItemTypeEnum}             from '../models/item-type.ts';
+import {ITVShow}                  from '../models/tv-show.ts';
+import TVShowItem                 from './tv-show-item.tsx';
 
 interface Props {
     className?: string
 }
 
-const Movies: FC<Props> = ({className}): ReactElement => {
+const TVShows: FC<Props> = ({className}): ReactElement => {
     const params = useParams();
-    const [currentPage, setCurrentPage] = useState(1);
-    const {data, isLoading, error} = useMovies(currentPage, params.subject ?? 'movie', params.topic ?? 'popular');
+    const [currentPage, setCurrentPage] = React.useState(1);
+
+    const {data, isLoading, error} = useMovies(currentPage, ItemTypeEnum.TVShow, params.topic ?? 'popular');
+    const tvShows = data?.results as ITVShow[] | undefined;
 
     return (
         <Box sx={{
@@ -24,13 +27,10 @@ const Movies: FC<Props> = ({className}): ReactElement => {
             padding: '20px',
         }}>
             <Box className={className} sx={styles}>
-                {data?.results && data?.results.map((item: IMovie): ReactElement => (
-                    <MovieItem key={item.title} item={item}/>
-                ))}
                 {isLoading && 'Loading...'}
                 {error && 'Error'}
+                {tvShows && tvShows.map((item: ITVShow): ReactElement => <TVShowItem key={item.name} item={item}/>)}
             </Box>
-
             <Pagination
                 count={data?.total_pages}
                 shape="rounded"
@@ -40,7 +40,7 @@ const Movies: FC<Props> = ({className}): ReactElement => {
     );
 };
 
-export default Movies;
+export default TVShows;
 
 const styles: SxProps = {
     padding: '20px',

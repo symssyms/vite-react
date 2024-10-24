@@ -3,29 +3,29 @@ import {FC, ReactElement}       from 'react';
 import {useParams}              from 'react-router-dom';
 import {useCredits, useDetails} from '../../api/api-requests.ts';
 import {ItemTypeEnum}           from '../models/item-type.ts';
-import {IMovieItem}             from '../models/movie-item.ts';
+import {ITVShowItem}            from '../models/tx-show-item.ts';
 import Actors                   from '../person/actors.tsx';
-import MovieHeader              from './movie-header.tsx';
+import TVShowHeader             from './tv-show-header.tsx';
 
-const Movie: FC = (): ReactElement => {
+const TVShow: FC = (): ReactElement => {
 
     const params = useParams();
-    const movieId = Number(params.id);
+    const tvShowId = Number(params.id);
     const {
-        data: movieData,
+        data: tvShowData,
         isLoading: isLoadingMovie,
         error: errorMovie
-    } = useDetails(movieId, ItemTypeEnum.Movie);
-    const {data: castData} = useCredits(movieId, ItemTypeEnum.Movie);
+    } = useDetails(tvShowId, ItemTypeEnum.TVShow);
+    const {data: castData} = useCredits(tvShowId, ItemTypeEnum.TVShow);
 
-    const movie = movieData as IMovieItem;
+    const tvShow = tvShowData as ITVShowItem;
     return (
         <Box sx={styles}>
             {
-                movieData !== undefined && castData !== undefined && !isLoadingMovie && !errorMovie &&
+                tvShowData !== undefined && castData !== undefined && !isLoadingMovie && !errorMovie &&
                 <Box>
-                    <MovieHeader item={movie} crews={castData.crew}/>
-                    <Actors itemId={movieId} subject={ItemTypeEnum.Movie}/>
+                    <TVShowHeader item={tvShow} crews={castData.crew}/>
+                    <Actors itemId={tvShowId} subject={ItemTypeEnum.TVShow}/>
                 </Box>
             }
             {isLoadingMovie && <Box component={'h1'}>Loading...</Box>}
@@ -34,7 +34,7 @@ const Movie: FC = (): ReactElement => {
     );
 };
 
-export default Movie;
+export default TVShow;
 
 const styles: SxProps = {
     padding: '20px',

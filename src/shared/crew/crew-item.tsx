@@ -10,7 +10,7 @@ interface Props {
     crew: ICrew
 }
 
-const MovieCrewItem: FC<Props> = ({crew}): ReactElement => {
+const CrewItem: FC<Props> = ({crew}): ReactElement => {
     const castUrl = crew.profile_path !== null
         ? AVATAR_BASE_URL_XS + crew.profile_path
         : crew.gender === 2 ? noUserMale : noUserFemale;
@@ -41,7 +41,7 @@ const MovieCrewItem: FC<Props> = ({crew}): ReactElement => {
     );
 };
 
-export default MovieCrewItem;
+export default CrewItem;
 
 const stylesTitle: SxProps = {
     flex: '1 0 auto',

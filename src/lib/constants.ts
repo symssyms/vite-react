@@ -16,7 +16,7 @@ export const navItems: INavItem[] = [
         ]
     },
     {
-        name: 'TV Shows', path: '/tv', children: [
+        name: 'TV Shows', path: '/tv-shows', children: [
             {name: 'Airing Today', path: 'airing_today'},
             {name: 'On The Air', path: 'on_the_air'},
             {name: 'Popular', path: 'popular'},

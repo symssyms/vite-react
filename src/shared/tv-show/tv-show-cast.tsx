@@ -5,25 +5,25 @@ import {useCredits, useDetails} from '../../api/api-requests.ts';
 import CastItemsList            from '../cast/cast-items-list.tsx';
 import CrewItemsList            from '../crew/crew-items-list.tsx';
 import {ItemTypeEnum}           from '../models/item-type.ts';
-import {IMovieItem}             from '../models/movie-item.ts';
-import MovieCastHeader          from './movie-cast-header.tsx';
+import {ITVShowItem}            from '../models/tx-show-item.ts';
+import TVShowCastHeader         from './tv-show-cast-header.tsx';
 
 
-const MovieCast: FC = (): ReactElement => {
+const TVShowCast: FC = (): ReactElement => {
     const params = useParams();
 
-    const movieId = Number(params.id);
+    const tvShowId = Number(params.id);
     const {
-        data: movieData,
+        data: tvShowData,
         isLoading: isLoadingMovie,
         error: errorMovie
-    } = useDetails(movieId, ItemTypeEnum.Movie);
-    const {data: castData, isLoading: isLoadingCast, error: errorCast} = useCredits(movieId, ItemTypeEnum.Movie);
-    const movie = movieData as IMovieItem;
+    } = useDetails(tvShowId, ItemTypeEnum.TVShow);
+    const {data: castData, isLoading: isLoadingCast, error: errorCast} = useCredits(tvShowId, ItemTypeEnum.TVShow);
+    const tvShow = tvShowData as ITVShowItem;
 
     return (
         <>
-            {movieData !== undefined && castData !== undefined && !isLoadingMovie && !isLoadingCast && !errorMovie && !errorCast &&
+            {tvShowData !== undefined && castData !== undefined && !isLoadingMovie && !isLoadingCast && !errorMovie && !errorCast &&
                 <Box sx={{
                     width: '100%',
                     display: 'flex',
@@ -31,7 +31,7 @@ const MovieCast: FC = (): ReactElement => {
                     gap: '10px',
                     justifyContent: 'space-between'
                 }}>
-                    <MovieCastHeader movie={movie}/>
+                    <TVShowCastHeader tvShow={tvShow}/>
                     <Box sx={{
                         display: 'flex',
                         flexDirection: 'row',
@@ -50,4 +50,4 @@ const MovieCast: FC = (): ReactElement => {
     );
 };
 
-export default MovieCast;
+export default TVShowCast;
