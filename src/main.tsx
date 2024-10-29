@@ -1,16 +1,11 @@
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
-import {createRoot}                       from 'react-dom/client'
-import {BrowserRouter}                    from 'react-router-dom';
-import App                                from './App.tsx'
+import {createRoot}                          from 'react-dom/client'
+import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import './index.css'
+import routes                                from './shared/routes/routes.tsx';
 
+const router = createBrowserRouter(routes, {basename: '/vite-react'});
 
-const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')!).render(
-    <BrowserRouter basename="/vite-react">
-        <QueryClientProvider client={queryClient}>
-            <App />
-        </QueryClientProvider>
-  </BrowserRouter>,
+    <RouterProvider router={router}/>
 )

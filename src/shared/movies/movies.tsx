@@ -2,6 +2,7 @@ import {Box, Pagination, SxProps}   from "@mui/material";
 import {FC, ReactElement, useState} from 'react';
 import {useParams}                  from 'react-router-dom';
 import {useMovies}                  from '../../api/api-requests.ts';
+import Loading                      from '../loading/loading.tsx';
 import {ItemTypeEnum}               from '../models/item-type.ts';
 import {IMovie}                     from '../models/movie.ts';
 import MovieItem                    from './movie-item.tsx';
@@ -16,6 +17,9 @@ const Movies: FC<Props> = ({className}): ReactElement => {
     const {data, isLoading, error} = useMovies(currentPage, ItemTypeEnum.Movie, params.topic ?? 'popular');
 
     const movies = data?.results as IMovie[] | undefined;
+
+    if (error) return <Loading/>;
+    if (isLoading || !movies) return <Loading/>;
     return (
         <Box sx={{
             display: 'flex',
@@ -26,9 +30,7 @@ const Movies: FC<Props> = ({className}): ReactElement => {
             padding: '20px',
         }}>
             <Box className={className} sx={styles}>
-                {movies && movies?.map((item: IMovie): ReactElement => <MovieItem key={item.title} item={item}/>)}
-                {isLoading && 'Loading...'}
-                {error && 'Error'}
+                {movies.map((item: IMovie): ReactElement => <MovieItem key={item.title} item={item}/>)}
             </Box>
 
             <Pagination
