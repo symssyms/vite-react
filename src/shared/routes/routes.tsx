@@ -23,12 +23,14 @@ const routes: RouteObject[] =
     [{
         Component: App,
         children: [
-            {path: 'movies/:topic?', element: <Movies/>},
-            {path: 'movie/:id/cast', element: <MovieCast/>},
-            {path: 'tv/:id/cast', element: <TVShowCast/>},
-            {path: 'movie/:id?', element: <Movie/>},
-            {path: 'tv-shows/:topic?', element: <TVShows/>},
-            {path: 'tv/:id?', element: <TVShow/>},
+            {
+                path: 'movies/:topic?', lazy: async () => ({element: await <Movies/>})
+            },
+            {path: 'movie/:id/cast', lazy: async () => ({element: await <MovieCast/>})},
+            {path: 'tv/:id/cast', lazy: async () => ({element: await <TVShowCast/>})},
+            {path: 'movie/:id?', lazy: async () => ({element: await <Movie/>})},
+            {path: 'tv-shows/:topic?', lazy: async () => ({element: await <TVShows/>})},
+            {path: 'tv/:id?', lazy: async () => ({element: await <TVShow/>})},
             {path: '/', element: <Navigate to={'movies/popular'}/>}
         ]
     }];
