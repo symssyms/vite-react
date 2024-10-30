@@ -2,6 +2,7 @@ import {Box, SxProps}               from '@mui/material';
 import {FC, ReactElement, useState} from 'react';
 import Poster                       from '../../components/ui/poster.tsx';
 import {
+    POSTER_BASE_URL_FOR_DOMINANT_COLOR,
     POSTER_BASE_URL_XXL
 }                                   from '../../lib/constants.ts';
 import {
@@ -32,7 +33,7 @@ const MovieHeader: FC<Props> = ({item, crews}): ReactElement => {
     const releaseDate: string = new Date(item.release_date).toLocaleDateString('en-US', {dateStyle: 'short'});
 
     const bgImage = `url('${POSTER_BASE_URL_XXL}/${item.backdrop_path} norepeat')`;
-    getDominantColorFromUrl(`https://image.tmdb.org/t/p/w154/${item.backdrop_path}`)
+    getDominantColorFromUrl(`${POSTER_BASE_URL_FOR_DOMINANT_COLOR}/${item.backdrop_path}`)
         .then((color: string) => {
             setDominantColor(color);
             setContrastColor(getContrastColor(color));
