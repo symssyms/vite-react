@@ -6,6 +6,7 @@ export const AVATAR_BASE_URL_XL: string = 'https://media.themoviedb.org/t/p/w300
 export const POSTER_BASE_URL_SM: string = 'https://media.themoviedb.org/t/p/w58_and_h87_face/';
 export const POSTER_BASE_URL_MD: string = 'https://image.tmdb.org/t/p/w154/';
 export const POSTER_BASE_URL_XXL: string = 'https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces';
+export const POSTER_BASE_URL_FOR_DOMINANT_COLOR: string = 'https://image.tmdb.org/t/p/w154';
 
 export const navItems: INavItem[] = [
     {

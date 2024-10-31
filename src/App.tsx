@@ -1,36 +1,25 @@
-import {Box, SxProps}            from "@mui/material";
-import {ReactElement}            from "react";
-import {Navigate, Route, Routes} from "react-router-dom";
-import Header                    from "./header.tsx";
-import MovieCast                 from './shared/movie/movie-cast.tsx';
-import Movie                     from './shared/movie/movie.tsx';
-import Movies                    from './shared/movies/movies.tsx';
-import TVShowCast                from './shared/tv-show/tv-show-cast.tsx';
-import TVShow                    from './shared/tv-show/tv-show.tsx';
-import TVShows                   from './shared/tv-shows/tv-shows.tsx';
+import {Box, SxProps}                     from "@mui/material";
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import {ReactElement}                     from "react";
+import {Outlet}                           from 'react-router-dom';
+import Header                             from "./header.tsx";
 
+const queryClient = new QueryClient();
 
-function App(): ReactElement {
+const App = (): ReactElement => (
 
-    return (
+    <QueryClientProvider client={queryClient}>
         <Box sx={styles} className={'app'}>
             <Header/>
             <Box sx={{width: '100%'}}>
-                <Routes>
-                    <Route path={'movies/:topic'} element={<Movies/>}/>
-                    <Route path={'movie/:id/cast'} element={<MovieCast/>}/>
-                    <Route path={'tv/:id/cast'} element={<TVShowCast/>}/>
-                    <Route path={'movie/:id'} element={<Movie/>}/>
-                    <Route path={'tv-shows/:topic'} element={<TVShows/>}/>
-                    <Route path={'tv/:id'} element={<TVShow/>}/>
-                    <Route path={'/'} element={<Navigate to={'movies/popular'}/>}/>
-                </Routes>
+                <Outlet/>
             </Box>
         </Box>
-    )
-}
+    </QueryClientProvider>
 
-export default App
+);
+
+export default App;
 
 const styles: SxProps = {
     width: '100%',
